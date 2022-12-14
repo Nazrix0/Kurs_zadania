@@ -2,6 +2,8 @@
 
 TARGET=192.168.56.123
 
+LOCAL_MACHINE_IP=192.168.56.102
+
 file_torun_remote="top_df_local.sh"
 
 ping $TARGET -c1 -t1 > /dev/null 2>&1
@@ -11,5 +13,5 @@ if [ "$res" == 1 ];then
     exit 1
 else
     scp  "$file_torun_remote" $TARGET:
-    ssh $TARGET './$file_torun_remote; source top_df_local.sh; scp "./$folder_name/$file_name" 192.168.56.102:./code/ex2/'
+    ssh $TARGET ' source '$file_torun_remote' ; scp "./$folder_name/$file_name" '$LOCAL_MACHINE_IP':./code/ex2/'
 fi
